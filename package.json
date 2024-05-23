@@ -7,7 +7,7 @@
     "-": "^0.0.1",
     "@apollo/client": "^3.10.0-rc.1",
     "@apollo/experimental-nextjs-app-support": "^0.10.1",
-    "google-maps-react": "^2.0.6",
+    "@react-google-maps/api": "^2.19.3",
     "graphql": "^16.8.1",
     "next": "^14.2.3",
     "normalize.css": "^8.0.1",
