@@ -1,0 +1,55 @@
+@import '@/styles/variables.scss';
+
+.footer {
+  background-color: $in-house;
+  border-top: 10px solid $rosey-cheek;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  color: $charcoal;
+  padding: 58px 26px;
+}
+
+.sectionTitle {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 38.75px;
+  margin-bottom: 30px;
+}
+
+.textList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.socialsList {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  max-width: 385px;
+}
+
+.listItem {
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 31.49px;
+  text-align: left;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  gap: 29px;
+  margin-bottom: 72px;
+}
+
+.inputEmail {
+  max-width: 498px;
+  flex-shrink: 0;
+}

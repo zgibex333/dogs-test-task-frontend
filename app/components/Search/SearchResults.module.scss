@@ -1,0 +1,27 @@
+@import '@/styles/variables.scss';
+
+.searchDropdown {
+  position: absolute;
+  top: 110%;
+  border: 1px solid $christmas-silver;
+  border-radius: 10px;
+  width: 100%;
+  overflow: auto;
+  color: $charcoal;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.searchItem {
+  padding: 6px 12px;
+  border-bottom: 1px solid $christmas-silver;
+  cursor: pointer;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background-color: $christmas-silver;
+  }
+}

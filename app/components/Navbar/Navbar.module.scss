@@ -1,0 +1,51 @@
+@import '@/styles/variables.scss';
+
+.navbar {
+  font-family: var(--font-cormorant);
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  color: $charcoal;
+
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    padding: 23px 6px;
+    font-family: var(--font-cormorant);
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 31.49px;
+    color: $charcoal;
+  }
+}
+
+.link {
+  position: relative;
+}
+
+.isActive::after {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  width: 120%;
+  height: 6px;
+  background-color: $pink-kisses;
+  top: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 3px;
+}
+
+.banner {
+  background-color: $in-house;
+  text-align: center;
+  padding: 6px;
+}
+
+.bannerText {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 38.75px;
+}

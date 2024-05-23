@@ -1,0 +1,13 @@
+@import '@/styles/variables.scss';
+
+.button {
+  color: $white;
+  border-radius: 30px;
+  background-color: $pink-kisses;
+  border: none;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 21px;
+  text-align: center;
+  padding: 10px 40px;
+}
