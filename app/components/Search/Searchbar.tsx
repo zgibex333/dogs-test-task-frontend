@@ -8,7 +8,6 @@ import { SearchResults } from '@/components/Search/SearchResults';
 export const Searchbar = () => {
   const [searchValue, setSearchValue] = useState('');
   const debouncedSearchValue = useDebounce(searchValue, 1000);
-  const showDropdown = !!debouncedSearchValue;
 
   return (
     <div className={styles.searchInputWithDropdown}>
@@ -18,8 +17,14 @@ export const Searchbar = () => {
           setSearchValue(e.target.value);
         }}
         iconPath="/icons/search.svg"
+        data-testid="search-input"
       />
-      {showDropdown && <SearchResults searchValue={debouncedSearchValue} />}
+      {searchValue && (
+        <SearchResults
+          searchValue={debouncedSearchValue}
+          setSearchValue={setSearchValue}
+        />
+      )}
     </div>
   );
 };

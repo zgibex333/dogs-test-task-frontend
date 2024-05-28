@@ -13,7 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-  '\n  query GetDogs($name: String!) {\n    dogs(name: $name) {\n      name\n    }\n  }\n':
+  '\n  query GetDogs($name: String!) {\n    dogs(name: $name) {\n      dogName: name\n      imageLink: image_link\n      minLifeExpectancy: min_life_expectancy\n      goodWithStrangers: good_with_strangers\n      goodWithOtherDogs: good_with_other_dogs\n    }\n  }\n':
     types.GetDogsDocument,
 };
 
@@ -35,8 +35,8 @@ export function gql(source: string): unknown;
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: '\n  query GetDogs($name: String!) {\n    dogs(name: $name) {\n      name\n    }\n  }\n'
-): (typeof documents)['\n  query GetDogs($name: String!) {\n    dogs(name: $name) {\n      name\n    }\n  }\n'];
+  source: '\n  query GetDogs($name: String!) {\n    dogs(name: $name) {\n      dogName: name\n      imageLink: image_link\n      minLifeExpectancy: min_life_expectancy\n      goodWithStrangers: good_with_strangers\n      goodWithOtherDogs: good_with_other_dogs\n    }\n  }\n'
+): (typeof documents)['\n  query GetDogs($name: String!) {\n    dogs(name: $name) {\n      dogName: name\n      imageLink: image_link\n      minLifeExpectancy: min_life_expectancy\n      goodWithStrangers: good_with_strangers\n      goodWithOtherDogs: good_with_other_dogs\n    }\n  }\n'];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

@@ -1,11 +1,11 @@
 type Query {
-  dogs(name: String!): [Dog]!
+  dogs(name: String!): [Dog!]!
 }
 
 type Dog {
-  name: String
-  image_link: String
-  min_life_expectancy: Int
-  good_with_strangers: Int
-  good_with_other_dogs: Int
+  name: String!
+  image_link: String!
+  min_life_expectancy: Int!
+  good_with_strangers: Int!
+  good_with_other_dogs: Int!
 }

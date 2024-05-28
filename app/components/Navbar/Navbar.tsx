@@ -20,6 +20,7 @@ export const Navbar = () => {
               <Link
                 href={path}
                 className={cx(styles.link, { [styles.isActive]: isActive })}
+                data-testid={`navlink-${path}`}
               >
                 {name}
               </Link>

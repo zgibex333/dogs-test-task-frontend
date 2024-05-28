@@ -31,16 +31,16 @@ export type Scalars = {
 
 export type Dog = {
   __typename?: 'Dog';
-  good_with_other_dogs?: Maybe<Scalars['Int']['output']>;
-  good_with_strangers?: Maybe<Scalars['Int']['output']>;
-  image_link?: Maybe<Scalars['String']['output']>;
-  min_life_expectancy?: Maybe<Scalars['Int']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
+  good_with_other_dogs: Scalars['Int']['output'];
+  good_with_strangers: Scalars['Int']['output'];
+  image_link: Scalars['String']['output'];
+  min_life_expectancy: Scalars['Int']['output'];
+  name: Scalars['String']['output'];
 };
 
 export type Query = {
   __typename?: 'Query';
-  dogs: Array<Maybe<Dog>>;
+  dogs: Array<Dog>;
 };
 
 export type QueryDogsArgs = {
@@ -53,7 +53,14 @@ export type GetDogsQueryVariables = Exact<{
 
 export type GetDogsQuery = {
   __typename?: 'Query';
-  dogs: Array<{ __typename?: 'Dog'; name?: string | null } | null>;
+  dogs: Array<{
+    __typename?: 'Dog';
+    dogName: string;
+    imageLink: string;
+    minLifeExpectancy: number;
+    goodWithStrangers: number;
+    goodWithOtherDogs: number;
+  }>;
 };
 
 export const GetDogsDocument = {
@@ -95,7 +102,31 @@ export const GetDogsDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                {
+                  kind: 'Field',
+                  alias: { kind: 'Name', value: 'dogName' },
+                  name: { kind: 'Name', value: 'name' },
+                },
+                {
+                  kind: 'Field',
+                  alias: { kind: 'Name', value: 'imageLink' },
+                  name: { kind: 'Name', value: 'image_link' },
+                },
+                {
+                  kind: 'Field',
+                  alias: { kind: 'Name', value: 'minLifeExpectancy' },
+                  name: { kind: 'Name', value: 'min_life_expectancy' },
+                },
+                {
+                  kind: 'Field',
+                  alias: { kind: 'Name', value: 'goodWithStrangers' },
+                  name: { kind: 'Name', value: 'good_with_strangers' },
+                },
+                {
+                  kind: 'Field',
+                  alias: { kind: 'Name', value: 'goodWithOtherDogs' },
+                  name: { kind: 'Name', value: 'good_with_other_dogs' },
+                },
               ],
             },
           },

@@ -1,6 +1,6 @@
 import { Searchbar } from '@/components/Search/Searchbar';
 import { Text } from '@/components/Text/Text';
-import React from 'react';
+import styles from './layout.module.scss';
 
 export default function infoLayout({
   children,
@@ -13,8 +13,8 @@ export default function infoLayout({
 }) {
   console.log(searchParams, 'searchparams layout');
   return (
-    <div>
-      <Text as="h1" fontFamily="cormorant">
+    <div className={styles.container}>
+      <Text as="h1" fontFamily="cormorant" classname={styles.title}>
         INFO DOG
       </Text>
       <Searchbar />

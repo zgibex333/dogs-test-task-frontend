@@ -1,0 +1,29 @@
+@import '@/styles/variables';
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.titleWithPicture {
+  background-color: $in-house;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 46px;
+  padding: 40px;
+}
+
+.imageContainer {
+  position: relative;
+  max-width: 700px;
+  width: 100%;
+  aspect-ratio: 1.5 / 1;
+  z-index: 0;
+}
+
+.img {
+  object-fit: contain;
+  z-index: -1;
+}
