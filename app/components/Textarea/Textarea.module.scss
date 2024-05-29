@@ -1,11 +1,6 @@
 @import '@/styles/variables.scss';
 
-.inputContainer {
-  width: 100%;
-  position: relative;
-}
-
-.input {
+.textArea {
   width: 100%;
   border: 1px solid $christmas-silver;
   font-family: var(--font-cormorant);
@@ -15,6 +10,7 @@
   padding: 19px 24px;
   color: $charcoal;
   border-radius: 10px;
+  resize: none;
 
   &::placeholder {
     color: $frilled-shark;
@@ -23,18 +19,4 @@
   &:disabled {
     opacity: 0.8;
   }
-
-  &.hasIcon {
-    padding-right: 72px;
-  }
-}
-
-.iconButton {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 16px;
-
-  border: none;
-  background-color: transparent;
 }

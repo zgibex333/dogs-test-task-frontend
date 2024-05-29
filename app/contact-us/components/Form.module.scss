@@ -1,0 +1,32 @@
+.container {
+  max-width: 1285px;
+  padding: 86px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  gap: 79px;
+  align-items: center;
+}
+
+.inputContainer {
+  display: flex;
+  width: 100%;
+  gap: 5%;
+  flex-grow: 1;
+}
+
+.inputWithError {
+  width: 100%;
+  position: relative;
+
+  span {
+    color: red;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+}
+
+.submitButton {
+  width: fit-content;
+}

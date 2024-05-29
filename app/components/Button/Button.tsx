@@ -1,16 +1,13 @@
-import { type ReactNode } from 'react';
+import { type ButtonHTMLAttributes } from 'react';
 import cx from 'classnames';
 import styles from './Button.module.scss';
 import { Text } from '@/components/Text/Text';
 
-interface Props {
-  children: ReactNode;
-  classname?: string;
-}
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
-export const Button = ({ children, classname }: Props) => {
+export const Button = ({ children, className }: Props) => {
   return (
-    <button className={cx(styles.button, classname)}>
+    <button className={cx(styles.button, className)}>
       <Text as="span" fontFamily="cormorant">
         {children}
       </Text>
