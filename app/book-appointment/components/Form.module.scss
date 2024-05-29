@@ -1,0 +1,35 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 66px;
+}
+
+.formTitle {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 48.44px;
+  text-align: left;
+}
+
+.inputsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.inputsRow {
+  display: flex;
+  gap: 63px;
+}
+
+.slotsContainer {
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.submitBtn {
+  width: fit-content;
+  max-width: 320px;
+  margin: 0 auto;
+}

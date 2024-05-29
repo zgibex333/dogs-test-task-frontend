@@ -1,0 +1,28 @@
+.calendarWrapper {
+  position: relative;
+}
+
+.calendarTitle {
+  position: absolute;
+  top: 11px;
+  left: 20px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21.8px;
+  letter-spacing: -0.0041em;
+}
+
+.nativeDate {
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  border: none;
+  position: absolute;
+}
+
+.errorText {
+  color: red;
+  position: absolute;
+  top: 100%;
+  left: 0;
+}

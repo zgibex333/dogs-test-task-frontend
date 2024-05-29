@@ -16,8 +16,6 @@ export const Form = () => {
 
   if (state.message === 'Success') return <p>SUCCESS</p>;
 
-  console.log(state);
-
   return (
     <form action={formAction} className={styles.container}>
       <div className={styles.inputContainer}>

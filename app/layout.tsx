@@ -5,6 +5,7 @@ import {
   Cinzel_Decorative,
   Tangerine,
   Cormorant_Garamond,
+  Poppins,
 } from 'next/font/google';
 import '@/styles/global.scss';
 import { ApolloWrapper } from '@/lib/apolloWrapper';
@@ -17,7 +18,7 @@ export const metadata = {
 const cormorant = Cormorant({
   subsets: ['latin'],
   variable: '--font-cormorant',
-  weight: ['400', '500'],
+  weight: ['400', '500', '700'],
 });
 
 const cormorantGaramond = Cormorant_Garamond({
@@ -38,9 +39,13 @@ const tangerine = Tangerine({
   weight: ['400', '700'],
 });
 
-const fontsVariablesString = `${cormorant.variable} ${cormorantGaramond.variable} ${cinzelDecorative.variable} ${tangerine.variable}`;
+const poppins = Poppins({
+  subsets: ['latin'],
+  variable: '--font-poppins',
+  weight: ['500', '700'],
+});
 
-console.log(fontsVariablesString);
+const fontsVariablesString = `${cormorant.variable} ${cormorantGaramond.variable} ${cinzelDecorative.variable} ${tangerine.variable} ${poppins.variable}`;
 
 export default function RootLayout({
   children,

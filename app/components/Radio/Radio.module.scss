@@ -1,0 +1,61 @@
+@import '@/styles/variables';
+
+.label {
+  position: relative;
+}
+
+.input {
+  height: 23px;
+  width: 25px;
+  position: absolute;
+  appearance: none;
+
+  &::before,
+  &::after {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-block;
+    content: '';
+    box-sizing: border-box;
+    width: 25px;
+    height: 23px;
+    border-radius: 4px;
+    margin: 0;
+    padding: 0;
+    border: 1px solid $charcoal;
+    appearance: none;
+    background-color: transparent;
+    transition: outline 0.1s;
+    cursor: pointer;
+  }
+
+  &::after {
+    background-size: 15px 9px;
+    background-color: $pink-kisses;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: none;
+    background-image: url('data:image/svg+xml;utf8,<svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.6216 0.456697L6.70047 7.69983L1.96051 3.36559C1.64716 3.09859 1.15885 3.10647 0.855984 3.38341C0.553123 3.66035 0.544507 4.10686 0.836496 4.39339L6.13846 9.24154C6.44897 9.52512 6.95198 9.52512 7.26248 9.24154L15.7456 1.4845C16.0557 1.20058 16.0557 0.740622 15.7456 0.456697C15.4351 0.173126 14.9321 0.173126 14.6216 0.456697Z" fill="white"/></svg>');
+  }
+
+  &:checked {
+    &::after {
+      display: inline-block;
+      border-color: $pink-kisses;
+    }
+
+    &::before {
+      border-color: $pink-kisses;
+    }
+  }
+}
+
+.labelText {
+  margin-left: 40px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 18.17px;
+  letter-spacing: 0.05em;
+  text-align: left;
+}
