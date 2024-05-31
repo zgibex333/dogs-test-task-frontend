@@ -2,20 +2,19 @@
 import { Text } from '@/components/Text/Text';
 import styles from './Timeslots.module.scss';
 import { Radio } from '@/components/Radio/Radio';
-
-const TIMESLOTS = [
-  '11 am - 12 pm',
-  '12 pm - 1 pm',
-  '1 pm - 2 pm',
-  '3 pm - 4 pm',
-  '4 pm - 5pm',
-];
+import { TIMESLOTS } from '@/constants/timeslots';
 
 interface Props {
   validationError?: string;
+  onValueChange?: (value: string) => void;
+  value?: string;
 }
 
-export const Timeslots = ({ validationError }: Props) => {
+export const Timeslots = ({ validationError, onValueChange, value }: Props) => {
+  const onRadioButtonClickHandler = (value: string) => () => {
+    onValueChange?.(value);
+  };
+
   return (
     <fieldset className={styles.container}>
       <legend>
@@ -25,7 +24,14 @@ export const Timeslots = ({ validationError }: Props) => {
       </legend>
       <fieldset className={styles.optionsContainer}>
         {TIMESLOTS.map((slot) => (
-          <Radio key={slot} labelText={slot} name="timeslot" value={slot} />
+          <Radio
+            key={slot}
+            labelText={slot}
+            name="timeslot"
+            value={slot}
+            checked={slot === value}
+            onChange={onRadioButtonClickHandler(slot)}
+          />
         ))}
       </fieldset>
       {validationError && (

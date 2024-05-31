@@ -1,16 +1,19 @@
 'use server';
+import { redirect } from 'next/navigation';
 import { date, object, string, ValidationError } from 'yup';
 
-export interface State {
-  errors?: {
-    name?: string;
-    lastname?: string;
-    email?: string;
-    phoneNumber?: string;
-    message?: string;
-  };
-  message?: string | null;
-}
+export type State =
+  | {
+      errors?: {
+        name?: string;
+        lastname?: string;
+        email?: string;
+        phoneNumber?: string;
+        message?: string;
+      };
+      message?: string | null;
+    }
+  | undefined;
 
 export async function bookingData(prevState: State, formData: FormData) {
   const today = new Date();
@@ -66,7 +69,16 @@ export async function bookingData(prevState: State, formData: FormData) {
       message: 'Validation Error',
     };
   }
-  return {
-    message: 'Success',
-  };
+
+  const urlParams = new URLSearchParams(
+    Object.keys(rawFormData).map((key) => {
+      if (key === 'date') return [key, formData.get('date')?.toString() ?? ''];
+      return [
+        key,
+        rawFormData[key as keyof typeof rawFormData]?.toString() ?? '',
+      ];
+    })
+  );
+
+  redirect('/book-appointment?showDialog=y&' + urlParams.toString());
 }

@@ -1,5 +1,9 @@
 @import '@/styles/variables.scss';
 
+.container {
+  position: relative;
+}
+
 .textArea {
   width: 100%;
   border: 1px solid $christmas-silver;
