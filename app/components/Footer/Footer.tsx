@@ -69,7 +69,7 @@ export const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.content}>
-        <div className="left">
+        <div className={styles.contentSection}>
           <Text as="h6" fontFamily="cormorant" classname={styles.sectionTitle}>
             Customer Service
           </Text>
@@ -87,8 +87,8 @@ export const Footer = () => {
             ))}
           </ul>
         </div>
-        <div className="middle">
-          <div>
+        <div className={styles.contentSection}>
+          <div className={styles.newsLetter}>
             <Text
               as="h6"
               fontFamily="cormorant"
@@ -101,7 +101,7 @@ export const Footer = () => {
               <Button>Submit</Button>
             </form>
           </div>
-          <div>
+          <div className={styles.connectWithUs}>
             <Text
               as="h6"
               fontFamily="cormorant"
@@ -127,7 +127,7 @@ export const Footer = () => {
             </ul>
           </div>
         </div>
-        <div className="right">
+        <div className={styles.contentSection}>
           <Text as="h6" fontFamily="cormorant" classname={styles.sectionTitle}>
             Navigation
           </Text>

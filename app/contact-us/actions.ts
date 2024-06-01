@@ -1,15 +1,8 @@
 'use server';
-import { object, string, ValidationError } from 'yup';
+import { ValidationError } from 'yup';
 import { Resend } from 'resend';
 import { EmailTemplate } from '@/components/EmailTemplate/EmailTemplate';
-
-const FormSchema = object({
-  name: string().required('Required field'),
-  lastname: string().required('Required field'),
-  email: string().email('Must be a valid email').required('Required field'),
-  phoneNumber: string().required('Required field'),
-  message: string().required('Required field'),
-});
+import { ContactUsFormSchema } from '@/constants/validationSchemas';
 
 export interface State {
   errors?: {
@@ -42,7 +35,7 @@ export async function sendContactData(prevState: State, formData: FormData) {
   } = {};
 
   try {
-    await FormSchema.validate(rawFormData, {
+    await ContactUsFormSchema.validate(rawFormData, {
       abortEarly: false,
     });
   } catch (e) {
@@ -63,15 +56,21 @@ export async function sendContactData(prevState: State, formData: FormData) {
   const { data, error } = await resend.emails.send({
     from: 'Acme <onboarding@resend.dev>',
     to: ['vvideolalal@gmail.com'],
-    subject: 'Hello world',
-    react: EmailTemplate({ firstName: 'John' }),
-    text: 'RANDOM MOTHFCKA',
+    subject: `From ${rawFormData.email?.toString()}`,
+    react: EmailTemplate({ message: rawFormData.message?.toString() ?? '' }),
+    text: 'Hi, you have a message from your customer',
   });
 
   console.log(data, 'DATA SUCCESS');
   console.log(error, 'ERROR ERROR');
 
+  if (error) {
+    return {
+      message: rawFormData.message?.toString() ?? 'Unexpected error',
+    };
+  }
+
   return {
-    message: 'Success',
+    message: 'Successfully sent',
   };
 }

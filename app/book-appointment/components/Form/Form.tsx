@@ -1,47 +1,21 @@
 'use client';
 import { Input } from '@/components/Input/Input';
 import { Text } from '@/components/Text/Text';
-import { Timeslots } from './Timeslots';
+import { Timeslots } from '../Timeslots/Timeslots';
 import { AppCalendar } from '@/components/Calendar/AppCalendar';
 import styles from './Form.module.scss';
 import { Textarea } from '@/components/Textarea/Textarea';
 import { Button } from '@/components/Button/Button';
 import { type FormEvent, useEffect, useState } from 'react';
-import { date, object, string, ValidationError } from 'yup';
+import { ValidationError } from 'yup';
 import { flushSync } from 'react-dom';
 import { usePathname, useRouter } from 'next/navigation';
-import { FormSubmittedDialogue } from './FormSubmittedDialogue';
+import { FormSubmittedDialogue } from '../SubmittedFormDialog/FormSubmittedDialogue';
 import { TIMESLOTS } from '@/constants/timeslots';
+import { type BookingFormState } from '@/constants/types';
+import { BookingFormSchema } from '@/constants/validationSchemas';
 
-const FormSchema = object({
-  name: string().required('Required field'),
-  lastname: string().required('Required field'),
-  email: string().email('Must be a valid email').required('Required field'),
-  phoneNumber: string().required('Required field'),
-  message: string().required('Required field'),
-  timeslot: string().required('Choose timeslot'),
-  date: date()
-    .test('Validate date', 'Choose not past date', (value) => {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      if (!value) return false;
-      if (value.getTime() < today.getTime()) return false;
-      return true;
-    })
-    .required('Date is required'),
-});
-
-interface FormState {
-  name: string;
-  lastname: string;
-  email: string;
-  phoneNumber: string;
-  timeslot: string;
-  date: Date;
-  message: string;
-}
-
-const defaultFormState = {
+const defaultFormState: BookingFormState = {
   name: '',
   lastname: '',
   email: '',
@@ -55,7 +29,7 @@ export const Form = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const [formState, setFormState] = useState<FormState>(defaultFormState);
+  const [formState, setFormState] = useState(defaultFormState);
 
   const [attemptedToSubmit, setAttemptedToSubmit] = useState(false);
 
@@ -66,7 +40,7 @@ export const Form = () => {
   useEffect(() => {
     const validateFields = async () => {
       try {
-        await FormSchema.validate(formState, { abortEarly: false });
+        await BookingFormSchema.validate(formState, { abortEarly: false });
         setValidationErrors({});
       } catch (e) {
         if (e instanceof ValidationError) {
@@ -80,8 +54,8 @@ export const Form = () => {
   }, [formState]);
 
   const onChangeInputField =
-    <T extends keyof FormState>(key: T) =>
-    (value: FormState[T]) => {
+    <T extends keyof BookingFormState>(key: T) =>
+    (value: BookingFormState[T]) => {
       setFormState((prev) => ({ ...prev, [key]: value }));
     };
 

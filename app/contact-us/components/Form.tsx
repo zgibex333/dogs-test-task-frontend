@@ -5,7 +5,7 @@ import styles from './Form.module.scss';
 import { Textarea } from '@/components/Textarea/Textarea';
 import { Button } from '@/components/Button/Button';
 import { useFormState } from 'react-dom';
-import { sendContactData } from './actions';
+import { sendContactData } from '../actions';
 import { Text } from '@/components/Text/Text';
 
 export const Form = () => {
@@ -14,10 +14,13 @@ export const Form = () => {
     message: '',
   });
 
-  if (state.message === 'Success') return <p>SUCCESS</p>;
-
   return (
     <form action={formAction} className={styles.container}>
+      {state.message && (
+        <Text as="h4" fontFamily="cormorant">
+          {state.message}
+        </Text>
+      )}
       <div className={styles.inputContainer}>
         <div className={styles.inputWithError}>
           <Input type="text" name="name" placeholder="Name" />

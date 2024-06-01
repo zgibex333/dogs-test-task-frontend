@@ -13,6 +13,20 @@
   padding: 58px 26px;
 }
 
+.contentSection:nth-child(2) {
+  flex: 1;
+  justify-content: center;
+  max-width: 700px;
+}
+
+.connectWithUs,
+.newsLetter {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+}
+
 .sectionTitle {
   font-size: 32px;
   font-weight: 700;
@@ -27,12 +41,12 @@
 }
 
 .socialsList {
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 10px;
   max-width: 385px;
+  width: 100%;
 }
 
 .listItem {
@@ -44,12 +58,46 @@
 
 .form {
   display: flex;
+  width: 100%;
   align-items: center;
   gap: 29px;
   margin-bottom: 72px;
 }
 
 .inputEmail {
-  max-width: 498px;
-  flex-shrink: 0;
+  flex-basis: 300px;
+  flex-grow: 1;
+  width: 100%;
+}
+
+@media screen and (max-width: 1000px) {
+  .form {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    padding: 26px;
+    gap: 26px;
+  }
+
+  .contentSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .connectWithUs,
+  .newsLetter {
+    align-items: center;
+  }
+
+  .form {
+    margin-bottom: 26px;
+  }
 }
