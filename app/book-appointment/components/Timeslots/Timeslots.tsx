@@ -5,12 +5,18 @@ import { Radio } from '@/components/Radio/Radio';
 import { TIMESLOTS } from '@/constants/timeslots';
 
 interface Props {
+  name?: string;
   validationError?: string;
   onValueChange?: (value: string) => void;
   value?: string;
 }
 
-export const Timeslots = ({ validationError, onValueChange, value }: Props) => {
+export const Timeslots = ({
+  validationError,
+  onValueChange,
+  value,
+  name,
+}: Props) => {
   const onRadioButtonClickHandler = (value: string) => () => {
     onValueChange?.(value);
   };
@@ -27,7 +33,7 @@ export const Timeslots = ({ validationError, onValueChange, value }: Props) => {
           <Radio
             key={slot}
             labelText={slot}
-            name="timeslot"
+            name={name}
             value={slot}
             checked={slot === value}
             onChange={onRadioButtonClickHandler(slot)}

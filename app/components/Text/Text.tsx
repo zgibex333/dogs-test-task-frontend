@@ -18,9 +18,20 @@ interface Props {
   fontFamily: FontStyle;
   children: ReactNode;
   classname?: string;
+  ['data-testid']?: string;
 }
 
-export const Text = ({ as, fontFamily, children, classname }: Props) => {
+export const Text = ({
+  as,
+  fontFamily,
+  children,
+  classname,
+  ...rest
+}: Props) => {
   const Tag = as;
-  return <Tag className={cx(styles[fontFamily], classname)}>{children}</Tag>;
+  return (
+    <Tag className={cx(styles[fontFamily], classname)} {...rest}>
+      {children}
+    </Tag>
+  );
 };

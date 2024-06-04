@@ -33,13 +33,13 @@ export const SearchResults = ({ searchValue, setSearchValue }: Props) => {
         className={styles.searchItem}
         onClick={handleSearchItemClick(dog.dogName)}
       >
-        <Text as="span" fontFamily="cormorant">
+        <Text as="span" fontFamily="cormorant" data-testid={`search-result`}>
           {dog.dogName}
         </Text>
       </li>
     ))
   ) : (
-    <Text as="span" fontFamily="cormorant">
+    <Text as="span" fontFamily="cormorant" data-testid="search-no-results">
       No Results Found
     </Text>
   );

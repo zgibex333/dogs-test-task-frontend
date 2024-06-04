@@ -13,15 +13,36 @@ interface Props {
   validationError?: string;
   onChange: (date: Date) => void;
   value: Date;
+  name?: string;
 }
 
-export const AppCalendar = ({ validationError, onChange, value }: Props) => {
+const formatDate = (date: Date | string) => {
+  date = new Date(date);
+  const day = `${date.getDate() < 10 ? '0' : ''}${date.getDate()}`;
+  const month = `${date.getMonth() + 1 < 10 ? '0' : ''}${date.getMonth() + 1}`;
+  const year = date.getFullYear();
+  return `${year}-${month}-${day}`;
+};
+
+export const AppCalendar = ({
+  validationError,
+  onChange,
+  value,
+  name,
+}: Props) => {
   const onDateChangeHandler = (date: Value) => {
     onChange(date as Date);
   };
 
   return (
     <div className={styles.calendarWrapper}>
+      <input
+        type="date"
+        defaultValue={formatDate(value)}
+        name={name}
+        tabIndex={-1}
+        className={styles.nativeDate}
+      />
       <Calendar
         calendarType="gregory"
         view="month"
@@ -33,6 +54,7 @@ export const AppCalendar = ({ validationError, onChange, value }: Props) => {
         value={value}
         onChange={onDateChangeHandler}
         showFixedNumberOfWeeks
+        locale="en-US"
       />
       {/* <Text as="span" fontFamily="cormorant" classname={styles.calendarTitle}>
         Select date

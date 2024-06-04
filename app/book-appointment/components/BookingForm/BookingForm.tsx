@@ -3,19 +3,18 @@ import { Input } from '@/components/Input/Input';
 import { Text } from '@/components/Text/Text';
 import { Timeslots } from '../Timeslots/Timeslots';
 import { AppCalendar } from '@/components/Calendar/AppCalendar';
-import styles from './Form.module.scss';
+import styles from './BookingForm.module.scss';
 import { Textarea } from '@/components/Textarea/Textarea';
 import { Button } from '@/components/Button/Button';
-import { type FormEvent, useEffect, useState } from 'react';
-import { ValidationError } from 'yup';
-import { flushSync } from 'react-dom';
+import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-import { FormSubmittedDialogue } from '../SubmittedFormDialog/FormSubmittedDialogue';
+import { BookingDialog } from '../BookingDialog/BookingDialog';
 import { TIMESLOTS } from '@/constants/timeslots';
 import { type BookingFormState } from '@/constants/types';
-import { BookingFormSchema } from '@/constants/validationSchemas';
+import { useFormState, useFormStatus } from 'react-dom';
+import { checkBookingInfo } from '../../actions';
 
-const defaultFormState: BookingFormState = {
+const getDefaultFormState = (): BookingFormState => ({
   name: '',
   lastname: '',
   email: '',
@@ -23,35 +22,21 @@ const defaultFormState: BookingFormState = {
   timeslot: TIMESLOTS[0],
   date: new Date(),
   message: '',
-};
+});
 
-export const Form = () => {
+export const BookingForm = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const [formState, setFormState] = useState(defaultFormState);
+  const [state, action] = useFormState(checkBookingInfo, { isValid: false });
 
-  const [attemptedToSubmit, setAttemptedToSubmit] = useState(false);
-
-  const [validationErrors, setValidationErrors] = useState<
-    Record<string, null | string>
-  >({});
+  const [formState, setFormState] = useState(getDefaultFormState);
 
   useEffect(() => {
-    const validateFields = async () => {
-      try {
-        await BookingFormSchema.validate(formState, { abortEarly: false });
-        setValidationErrors({});
-      } catch (e) {
-        if (e instanceof ValidationError) {
-          const errors: Record<string, string | null> = {};
-          e.inner.forEach((el) => el.path && (errors[el.path] = el.message));
-          setValidationErrors(() => ({ ...errors }));
-        }
-      }
-    };
-    validateFields();
-  }, [formState]);
+    if (state.isValid) {
+      router.push(pathname + '?booking=y');
+    }
+  }, [state.isValid, router, pathname]);
 
   const onChangeInputField =
     <T extends keyof BookingFormState>(key: T) =>
@@ -59,24 +44,14 @@ export const Form = () => {
       setFormState((prev) => ({ ...prev, [key]: value }));
     };
 
-  const onFormSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    flushSync(() => {
-      setAttemptedToSubmit(true);
-    });
-    if (Object.keys(validationErrors).length) {
-      return;
-    }
-    const params = new URLSearchParams(Object.entries(formState));
-    setFormState(defaultFormState);
-    setAttemptedToSubmit(false);
-    router.push(pathname + '?showDialog=y' + `&${params.toString()}`);
+  const resetFormFields = () => {
+    setFormState(getDefaultFormState());
   };
 
   return (
     <>
-      <FormSubmittedDialogue />
-      <form className={styles.form} onSubmit={onFormSubmit}>
+      <BookingDialog {...formState} resetForm={resetFormFields} />
+      <form className={styles.form} data-testid="booking-form" action={action}>
         <Text as="h2" fontFamily="cormorant" classname={styles.formTitle}>
           Enter your information here
         </Text>
@@ -87,18 +62,16 @@ export const Form = () => {
               placeholder="First name"
               onValueChange={onChangeInputField('name')}
               value={formState.name}
-              validationErrorText={
-                attemptedToSubmit ? validationErrors.name ?? '' : ''
-              }
+              validationErrorText={state.errors?.name}
+              data-testid="input-firstname"
             />
             <Input
               name="lastname"
               placeholder="Last name"
               onValueChange={onChangeInputField('lastname')}
               value={formState.lastname}
-              validationErrorText={
-                attemptedToSubmit ? validationErrors.lastname ?? '' : ''
-              }
+              validationErrorText={state.errors?.lastname}
+              data-testid="input-lastname"
             />
           </div>
           <div className={styles.inputsRow}>
@@ -107,33 +80,29 @@ export const Form = () => {
               placeholder="Email"
               onValueChange={onChangeInputField('email')}
               value={formState.email}
-              validationErrorText={
-                attemptedToSubmit ? validationErrors.email ?? '' : ''
-              }
+              validationErrorText={state.errors?.email}
+              data-testid="input-email"
             />
             <Input
               name="phoneNumber"
               placeholder="Phone number"
               onValueChange={onChangeInputField('phoneNumber')}
               value={formState.phoneNumber}
-              validationErrorText={
-                attemptedToSubmit ? validationErrors.phoneNumber ?? '' : ''
-              }
+              validationErrorText={state.errors?.phoneNumber}
+              data-testid="input-phoneNumber"
             />
           </div>
         </div>
         <div className={styles.slotsContainer}>
           <Timeslots
-            validationError={
-              attemptedToSubmit ? validationErrors.timeslot ?? '' : ''
-            }
+            name="timeslot"
+            validationError={state.errors?.timeslot}
             onValueChange={onChangeInputField('timeslot')}
             value={formState.timeslot}
           />
           <AppCalendar
-            validationError={
-              attemptedToSubmit ? validationErrors.date ?? '' : ''
-            }
+            name="date"
+            validationError={state.errors?.date}
             value={formState.date}
             onChange={onChangeInputField('date')}
           />
@@ -144,16 +113,27 @@ export const Form = () => {
             placeholder="Any special requests for your pet(s)..."
             name="message"
             rows={2}
-            validationErrorText={
-              attemptedToSubmit ? validationErrors.message ?? '' : ''
-            }
+            validationErrorText={state.errors?.message}
             value={formState.message}
+            data-testid="input-message"
           />
         </div>
-        <Button type="submit" className={styles.submitBtn}>
-          Book Appointment
-        </Button>
+        <FormButton />
       </form>
     </>
+  );
+};
+
+const FormButton = () => {
+  const { pending } = useFormStatus();
+  return (
+    <Button
+      type="submit"
+      className={styles.submitBtn}
+      disabled={pending}
+      data-testid="book-button"
+    >
+      Book Appointment
+    </Button>
   );
 };

@@ -1,14 +1,19 @@
-import { type BookingFormState } from '@/constants/types';
 import { type PayPalButtonsComponentProps } from '@paypal/react-paypal-js';
+import {
+  type CreateOrderData,
+  type CreateOrderActions,
+} from '@paypal/paypal-js';
 
 export const createClientOrder =
-  (body: BookingFormState): PayPalButtonsComponentProps['createOrder'] =>
-  async () => {
+  () // body: BookingFormState
+  : PayPalButtonsComponentProps['createOrder'] =>
+  async (data: CreateOrderData, actions: CreateOrderActions) => {
     try {
       const response = await fetch('/api/payment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
+        // body: JSON.stringify(body),
+        body: JSON.stringify(''),
       });
 
       const data: any = await response.json();
@@ -55,66 +60,68 @@ export const getAccessToken = async () => {
   }
 };
 
-export const createBackendOrder = async ({
-  date,
-  email,
-  timeslot,
-}: BookingFormState) => {
-  const accessToken = await getAccessToken();
-  const response = await fetch(
-    'https://api-m.sandbox.paypal.com/v2/checkout/orders',
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify({
-        purchase_units: [
-          {
-            items: [
-              {
-                name: 'Visit',
-                quantity: '1',
-                unit_amount: {
-                  currency_code: 'USD',
-                  value: '100.00',
-                },
-              },
-            ],
-            description: `Email: ${email}: Visit on ${date.toString().split('T')[0]} : ${timeslot}`,
-            amount: {
-              currency_code: 'USD',
-              value: '100.00',
-              breakdown: {
-                item_total: {
-                  currency_code: 'USD',
-                  value: '100.00',
-                },
-              },
-            },
-            reference_id: 'd9f80740-38f0-11e8-b467-0ed5f89f718b',
-          },
-        ],
-        intent: 'CAPTURE',
-        payment_source: {
-          paypal: {
-            experience_context: {
-              payment_method_preference: 'IMMEDIATE_PAYMENT_REQUIRED',
-              payment_method_selected: 'PAYPAL',
-              brand_name: 'EXAMPLE INC',
-              locale: 'en-US',
-              landing_page: 'LOGIN',
-              shipping_preference: 'GET_FROM_FILE',
-              user_action: 'PAY_NOW',
-              return_url: 'https://example.com/returnUrl',
-              cancel_url: 'https://example.com/cancelUrl',
-            },
-          },
+export const createBackendOrder = async () =>
+  // {
+  //   date,
+  //   email,
+  //   timeslot,
+  // }: BookingFormState
+  {
+    const accessToken = await getAccessToken();
+    const response = await fetch(
+      'https://api-m.sandbox.paypal.com/v2/checkout/orders',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
         },
-      }),
-    }
-  );
+        body: JSON.stringify({
+          purchase_units: [
+            {
+              items: [
+                {
+                  name: 'Visit',
+                  quantity: '1',
+                  unit_amount: {
+                    currency_code: 'USD',
+                    value: '100.00',
+                  },
+                },
+              ],
+              description: `Email`,
+              amount: {
+                currency_code: 'USD',
+                value: '100.00',
+                breakdown: {
+                  item_total: {
+                    currency_code: 'USD',
+                    value: '100.00',
+                  },
+                },
+              },
+              reference_id: 'd9f80740-38f0-11e8-b467-0ed5f89f718b',
+            },
+          ],
+          intent: 'CAPTURE',
+          payment_source: {
+            paypal: {
+              experience_context: {
+                payment_method_preference: 'IMMEDIATE_PAYMENT_REQUIRED',
+                payment_method_selected: 'PAYPAL',
+                brand_name: 'EXAMPLE INC',
+                locale: 'en-US',
+                landing_page: 'LOGIN',
+                shipping_preference: 'GET_FROM_FILE',
+                user_action: 'PAY_NOW',
+                return_url: 'https://example.com/returnUrl',
+                cancel_url: 'https://example.com/cancelUrl',
+              },
+            },
+          },
+        }),
+      }
+    );
 
-  return await response.json();
-};
+    return await response.json();
+  };

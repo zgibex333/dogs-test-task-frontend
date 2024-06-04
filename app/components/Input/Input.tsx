@@ -39,7 +39,12 @@ export const Input = ({
         </button>
       )}
       {validationErrorText && (
-        <Text as="span" fontFamily="cormorant" classname={styles.errorText}>
+        <Text
+          as="span"
+          fontFamily="cormorant"
+          classname={styles.errorText}
+          data-testid="input-validation-error"
+        >
           {validationErrorText}
         </Text>
       )}

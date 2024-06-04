@@ -9,6 +9,7 @@ interface Props {
 }
 
 export const DogInfo = async ({ name }: Props) => {
+  console.log(name);
   const { data } = await getClient().query({
     query: GET_DOGS_QUERY,
     variables: {

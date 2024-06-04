@@ -27,7 +27,12 @@ export const Textarea = ({
         {...rest}
       />
       {validationErrorText && (
-        <Text as="span" fontFamily="cormorant" classname={styles.errorText}>
+        <Text
+          as="span"
+          fontFamily="cormorant"
+          classname={styles.errorText}
+          data-testid="textarea-validation-error"
+        >
           {validationErrorText}
         </Text>
       )}

@@ -25,3 +25,25 @@ export const ContactUsFormSchema = object({
   phoneNumber: string().required('Required field'),
   message: string().required('Required field'),
 });
+
+export const PaymentInfoSchema = object({
+  cardNumber: string()
+    .test('Check credit card', 'Invalid card number', (value) => {
+      if (!value) return true;
+      return /^\d{16}$/.test(value.replace(/\D/g, ''));
+    })
+    .required('Required field'),
+  expiration: string()
+    .test('Check expiration date', 'Invalid expiration date', (value) => {
+      if (!value) return true;
+      return /^(0[1-9]|1[0-2])\/([0-9]{2})$/.test(value);
+    })
+    .required('Required field'),
+  cvc: string()
+    .test('Check credit card', 'Invalid cvc', (value) => {
+      if (!value) return true;
+      return /^\d{3}$/.test(value.replace(/\D/g, ''));
+    })
+    .required('Required field'),
+  cardHolder: string().required('Required field'),
+});

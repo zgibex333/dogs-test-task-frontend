@@ -9,16 +9,17 @@ import { Button } from '@/components/Button/Button';
 interface Props {
   title: string;
   children: ReactNode;
+  name: string;
   onClose?: () => void;
   onOk?: () => void;
 }
 
-export const Dialogue = ({ title, onOk, onClose, children }: Props) => {
+export const Dialogue = ({ title, onOk, onClose, children, name }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const dialogRef = useRef<null | HTMLDialogElement>(null);
-  const showDialog = searchParams.get('showDialog');
+  const showDialog = searchParams.get(name);
 
   useEffect(() => {
     if (showDialog === 'y') {
@@ -26,7 +27,7 @@ export const Dialogue = ({ title, onOk, onClose, children }: Props) => {
     } else {
       dialogRef.current?.close();
     }
-  }, [showDialog]);
+  }, [showDialog, name]);
 
   const onCloseDialog = () => {
     onClose?.();
@@ -39,7 +40,12 @@ export const Dialogue = ({ title, onOk, onClose, children }: Props) => {
   };
 
   return (
-    <dialog ref={dialogRef} className={styles.dialogue} onClose={onCloseDialog}>
+    <dialog
+      ref={dialogRef}
+      className={styles.dialogue}
+      onClose={onCloseDialog}
+      data-testid="dialog"
+    >
       <header className={styles.header}>
         <Text as="h2" fontFamily="cormorant">
           {title}

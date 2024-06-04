@@ -1,0 +1,16 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.inputRow {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+}
+
+.input {
+  flex-grow: 1;
+}
