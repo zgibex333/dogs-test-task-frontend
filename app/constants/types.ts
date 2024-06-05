@@ -7,3 +7,9 @@ export interface BookingFormState {
   date: Date;
   message: string;
 }
+
+export interface StoreItem {
+  price: string;
+  description: string;
+  imageSrc: string;
+}

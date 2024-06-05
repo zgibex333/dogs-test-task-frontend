@@ -8,6 +8,7 @@ import {
   Poppins,
 } from 'next/font/google';
 import '@/styles/global.scss';
+import '@/styles/common.scss';
 import { ApolloWrapper } from '@/lib/apolloWrapper';
 
 export const metadata = {

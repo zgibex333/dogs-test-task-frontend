@@ -1,0 +1,79 @@
+@import '@/styles/variables.scss';
+
+.hero {
+  aspect-ratio: 1440 / 786;
+  background-image: url('/images/hero.png');
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.heroContent {
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 64px;
+  text-align: center;
+  padding: 20px 0px;
+}
+
+.heroBtn {
+  width: fit-content;
+}
+
+.store {
+  padding: 183px 0px 32px;
+}
+
+.storeDetails {
+  display: flex;
+  gap: 5%;
+  align-items: center;
+  padding-bottom: 69px;
+}
+
+.cardTitle {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 43.6px;
+  text-align: center;
+}
+
+.cardText {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 26.64px;
+  text-align: center;
+}
+
+.storeImage {
+  width: 100%;
+  flex: 1;
+}
+
+.storeDetailsTextContainer {
+  flex: 1.14;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .heroContent {
+    color: $white;
+  }
+
+  .store {
+    padding: 32px 0px 32px;
+  }
+
+  .storeDetails {
+    flex-direction: column-reverse;
+    gap: 20px;
+  }
+}
