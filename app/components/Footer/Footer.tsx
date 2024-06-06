@@ -3,8 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import styles from './Footer.module.scss';
-import { Button } from '@/components/Button/Button';
-import { Input } from '@/components/Input/Input';
+import { Newsletter } from '@/components/Newsletter/Newsletter';
 
 const customerServiceItems = [
   'Blog',
@@ -97,8 +96,7 @@ export const Footer = () => {
               Subscribe to our Newsletter
             </Text>
             <form className={styles.form}>
-              <Input placeholder="Email" className={styles.inputEmail} />
-              <Button>Submit</Button>
+              <Newsletter className={styles.inputEmail} placeholder="Email" />
             </form>
           </div>
           <div className={styles.connectWithUs}>

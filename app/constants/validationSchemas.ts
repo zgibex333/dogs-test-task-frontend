@@ -47,3 +47,7 @@ export const PaymentInfoSchema = object({
     .required('Required field'),
   cardHolder: string().required('Required field'),
 });
+
+export const NewsLetterSchema = object({
+  email: string().email('Must be a valid email').required('Required field'),
+});

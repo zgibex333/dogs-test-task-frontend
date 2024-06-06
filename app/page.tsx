@@ -5,6 +5,7 @@ import Image from 'next/image';
 import cx from 'classnames';
 import { carryOns, collars } from '@/constants/storeData';
 import { StoreBlock } from '@/components/StoreBlock/StoreBlock';
+import Link from 'next/link';
 
 export default function HomePage() {
   return (
@@ -15,7 +16,10 @@ export default function HomePage() {
             <Text as="h1" fontFamily="cormorant">
               Book your doggy spa day!
             </Text>
-            <Button className={styles.heroBtn}>Book Appointment</Button>
+
+            <Link href="/book-appointment">
+              <Button className={styles.heroBtn}>Book Appointment</Button>
+            </Link>
           </div>
         </div>
       </section>
