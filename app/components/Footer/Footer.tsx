@@ -89,7 +89,7 @@ export const Footer = () => {
         <div className={styles.contentSection}>
           <div className={styles.newsLetter}>
             <Text
-              as="h6"
+              as="h5"
               fontFamily="cormorant"
               classname={styles.sectionTitle}
             >
