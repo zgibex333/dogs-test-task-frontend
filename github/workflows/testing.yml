@@ -1,0 +1,13 @@
+name: Jest tests
+on: push
+jobs: 
+	runs-on: ubuntu-latest
+	steps:
+		- name: Get repository
+			uses: actions/checkout@v4
+		- name: Yarn install 
+			run: yarn install 
+		- name: run test 
+			run: yarn test
+
+	
