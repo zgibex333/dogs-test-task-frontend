@@ -6,7 +6,7 @@ import { AppCalendar } from '@/components/Calendar/AppCalendar';
 import styles from './BookingForm.module.scss';
 import { Textarea } from '@/components/Textarea/Textarea';
 import { Button } from '@/components/Button/Button';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { BookingDialog } from '../BookingDialog/BookingDialog';
 import { TIMESLOTS } from '@/constants/timeslots';
@@ -50,7 +50,10 @@ export const BookingForm = () => {
 
   return (
     <>
-      <BookingDialog {...formState} resetForm={resetFormFields} />
+      <Suspense fallback="...">
+        <BookingDialog {...formState} resetForm={resetFormFields} />
+      </Suspense>
+
       <form className={styles.form} data-testid="booking-form" action={action}>
         <Text as="h2" fontFamily="cormorant" classname={styles.formTitle}>
           Enter your information here

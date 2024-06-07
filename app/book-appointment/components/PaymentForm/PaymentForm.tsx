@@ -4,7 +4,7 @@ import { Input } from '@/components/Input/Input';
 import styles from './PaymentForm.module.scss';
 import { Text } from '@/components/Text/Text';
 import { Button } from '@/components/Button/Button';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import PaymentDialog from '../PaymentDialog/PaymentDialog';
 import { useFormState, useFormStatus } from 'react-dom';
@@ -60,13 +60,15 @@ export const PaymentForm = () => {
 
   return (
     <>
-      <PaymentDialog
-        cardHolder={cardHolder}
-        cardNumber={cardNumber}
-        expiration={expiration}
-        cvc={cvc}
-        resetForm={resetFormState}
-      />
+      <Suspense fallback="...">
+        <PaymentDialog
+          cardHolder={cardHolder}
+          cardNumber={cardNumber}
+          expiration={expiration}
+          cvc={cvc}
+          resetForm={resetFormState}
+        />
+      </Suspense>
       <form className={styles.form} action={action}>
         <Text as="h2" fontFamily="cormorant">
           Enter your payment information

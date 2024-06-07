@@ -4,12 +4,8 @@ import styles from './layout.module.scss';
 
 export default function infoLayout({
   children,
-  searchParams,
 }: {
   children: React.ReactNode;
-  searchParams?: {
-    query?: string;
-  };
 }) {
   return (
     <div className={styles.container}>

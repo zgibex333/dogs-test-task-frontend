@@ -1,8 +1,8 @@
-import { type BookingFormState } from '@/constants/types';
+// import { type BookingFormState } from '@/constants/types';
 import { createBackendOrder } from '@/lib/paypal';
 
 export async function POST(request: Request) {
-  const body: BookingFormState = await request.json();
-  const order = await createBackendOrder(body);
+  // const body: BookingFormState = await request.json();
+  const order = await createBackendOrder();
   return Response.json({ order });
 }
