@@ -19,9 +19,9 @@ jobs:
       - name: Build Project Artifacts
         run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
         env:
-          NEXT_PUBLIC_MAPS_API: ${{ $NEXT_PUBLIC_MAPS_API }}
-          NEXT_PUBLIC_PAYPAL_CLIENT_ID: ${{ $NEXT_PUBLIC_PAYPAL_CLIENT_ID }}
-          NEXT_RESEND_API: ${{ $NEXT_RESEND_API }}
-          NEXT_PRIVATE_PAYPAL_KEY: ${{ $NEXT_PRIVATE_PAYPAL_KEY }}
+          NEXT_PUBLIC_MAPS_API: ${{ vars.NEXT_PUBLIC_MAPS_API }}
+          NEXT_PUBLIC_PAYPAL_CLIENT_ID: ${{ vars.NEXT_PUBLIC_PAYPAL_CLIENT_ID }}
+          NEXT_RESEND_API: ${{ vars.NEXT_RESEND_API }}
+          NEXT_PRIVATE_PAYPAL_KEY: ${{ vars.NEXT_PRIVATE_PAYPAL_KEY }}
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
