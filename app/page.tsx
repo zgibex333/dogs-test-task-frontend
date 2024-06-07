@@ -10,6 +10,7 @@ import Link from 'next/link';
 export default function HomePage() {
   return (
     <>
+      <p>ENV {process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID}</p>
       <section className={styles.hero}>
         <div className="container">
           <div className={styles.heroContent}>
