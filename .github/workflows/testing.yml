@@ -15,8 +15,8 @@ jobs:
       - name: Install Vercel CLI
         run: yarn global add vercel@latest
       - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - name: Build Project Artifacts
-        run: vercel build --token=${{ secrets.VERCEL_TOKEN }} 
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }} 
       - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --token=${{ secrets.VERCEL_TOKEN }} --env NEXT_PUBLIC_MAPS_API=${{ vars.NEXT_PUBLIC_MAPS_API }} --env NEXT_PUBLIC_PAYPAL_CLIENT_ID=${{ vars.NEXT_PUBLIC_PAYPAL_CLIENT_ID }} --env NEXT_RESEND_API=${{ vars.NEXT_RESEND_API }} --env NEXT_PRIVATE_PAYPAL_KEY=${{ vars.NEXT_PRIVATE_PAYPAL_KEY }}
+        run: vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }} --env NEXT_PUBLIC_MAPS_API=${{ vars.NEXT_PUBLIC_MAPS_API }} --env NEXT_PUBLIC_PAYPAL_CLIENT_ID=${{ vars.NEXT_PUBLIC_PAYPAL_CLIENT_ID }} --env NEXT_RESEND_API=${{ vars.NEXT_RESEND_API }} --env NEXT_PRIVATE_PAYPAL_KEY=${{ vars.NEXT_PRIVATE_PAYPAL_KEY }}
