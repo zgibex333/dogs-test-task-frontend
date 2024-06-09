@@ -1,0 +1,14 @@
+{
+  "data": {
+    "dogs": [
+      {
+        "dogName": "Golden Retriever",
+        "imageLink": "https://api-ninjas.com/images/dogs/golden_retriever.jpg",
+        "minLifeExpectancy": 10,
+        "goodWithStrangers": 5,
+        "goodWithOtherDogs": 5,
+        "__typename": "Dog"
+      }
+    ]
+  }
+}

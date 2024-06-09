@@ -1,0 +1,30 @@
+{
+  "data": {
+    "dogs": [
+      {
+        "dogName": "Finnish Spitz",
+        "imageLink": "https://api-ninjas.com/images/dogs/finnish_spitz.jpg",
+        "minLifeExpectancy": 13,
+        "goodWithStrangers": 3,
+        "goodWithOtherDogs": 4,
+        "__typename": "Dog"
+      },
+      {
+        "dogName": "German Spitz",
+        "imageLink": "https://api-ninjas.com/images/dogs/german_spitz.jpg",
+        "minLifeExpectancy": 13,
+        "goodWithStrangers": 4,
+        "goodWithOtherDogs": 4,
+        "__typename": "Dog"
+      },
+      {
+        "dogName": "Japanese Spitz",
+        "imageLink": "https://api-ninjas.com/images/dogs/japanese_spitz.jpg",
+        "minLifeExpectancy": 12,
+        "goodWithStrangers": 3,
+        "goodWithOtherDogs": 3,
+        "__typename": "Dog"
+      }
+    ]
+  }
+}

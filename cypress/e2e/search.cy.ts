@@ -4,7 +4,7 @@ describe('search', () => {
   });
 
   it('works with incorrect input data', () => {
-    cy.get('[data-testid="search-input"]').type('abrakadabra');
+    cy.get('[data-testid="search-input"]').type('incorrect query');
     cy.get('[data-testid="search-no-results"]').should('exist');
   });
 

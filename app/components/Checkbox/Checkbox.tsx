@@ -4,7 +4,7 @@ import styles from './Checkbox.module.scss';
 
 interface Props {
   labelText: string;
-  setValues: (isChecked: boolean) => void;
+  setValues?: (isChecked: boolean) => void;
 }
 
 export const Checkbox = ({ labelText, setValues }: Props) => {
@@ -12,7 +12,7 @@ export const Checkbox = ({ labelText, setValues }: Props) => {
 
   const checkboxClickHandler = () => {
     setChecked(!checked);
-    setValues(!checked);
+    setValues?.(!checked);
   };
 
   return (
