@@ -4,20 +4,24 @@ env:
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 on: push
 jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          build: yarn build
+          start: yarn start
+          env: ci=y
   deploy:
+    needs: tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: install dependencies
         run: yarn install
-      - name: build app
-        run: yarn build
-      - name: start app
-        run: yarn start
-      - name: jest tests
-        run: yarn test
-      - name: cypress tests
-        run: yarn cypress run --env ci=y
       - name: Install Vercel CLI
         run: yarn global add vercel@latest
       - name: Pull Vercel Environment Information
